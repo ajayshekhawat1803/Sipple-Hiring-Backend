@@ -7,6 +7,8 @@ const CandidateSchema = new mongoose.Schema({
     skills: Array,
     mobile: Number,
     email: String,
+    linkedIn: String,
+    github: String,
     profilePic: Object,
     qualifications: {
         secondary: {
@@ -25,7 +27,8 @@ const CandidateSchema = new mongoose.Schema({
             percentage: String
         }
     },
-    projects: Array
+    projects: Array,
+    resume: Object
 })
 
 const CandidateModel = mongoose.model("candidates", CandidateSchema)

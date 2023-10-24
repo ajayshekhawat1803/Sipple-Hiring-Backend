@@ -20,7 +20,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
-
 AdminRouter.post("/login", async (req, res) => {
     const { username, password } = req.body
     if (username === "admin" && password === "admin") {
@@ -31,6 +30,7 @@ AdminRouter.post("/login", async (req, res) => {
     }
 })
 
+
 AdminRouter.post("/add-candidate", upload.single("profilePic"), async (req, res) => {
     const CandidateInfo = new CandidateModel(req.body)
     CandidateInfo.profilePic = req.file
@@ -39,3 +39,31 @@ AdminRouter.post("/add-candidate", upload.single("profilePic"), async (req, res)
 })
 
 export default AdminRouter
+
+
+
+// const profilePicStorage = multer.diskStorage({
+//     destination: 'uploads/Candidates',
+//     filename: function (req, file, callback) {
+//         const ext = path.extname(file.originalname);
+//         const filename = req.body.name + ext;
+//         callback(null, filename);
+//     },
+// });
+// const resumeStorage = multer.diskStorage({
+//     destination: 'uploads/Resumes',
+//     filename: function (req, file, callback) {
+//         const ext = path.extname(file.originalname);
+//         const filename = req.body.name + ext;
+//         callback(null, filename);
+//     },
+// });
+// const uploadProfilePic = multer({ storage: profilePicStorage });
+// const uploadResume = multer({ storage: resumeStorage });
+// AdminRouter.post("/add-candidate", uploadProfilePic.array('profilePic', 1), uploadResume.array('resume', 1), async (req, res) => {
+//     const CandidateInfo = new CandidateModel(req.body)
+//     CandidateInfo.profilePic = req.files[0]
+//     CandidateInfo.resume = req.files[1]
+//     let result = await CandidateInfo.save()
+//     res.json(result)
+// })
