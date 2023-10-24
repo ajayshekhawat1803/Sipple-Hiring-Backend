@@ -7,7 +7,7 @@ const CandidateSchema = new mongoose.Schema({
     skills: Array,
     mobile: Number,
     email: String,
-    profileImg: Object,
+    profilePic: Object,
     qualifications: Object,
 })
 
