@@ -8,7 +8,23 @@ const CandidateSchema = new mongoose.Schema({
     mobile: Number,
     email: String,
     profilePic: Object,
-    qualifications: Object,
+    qualifications: {
+        secondary: {
+            schoolName10: String,
+            year10: String,
+            percentage10: String
+        },
+        seniorSecondary: {
+            schoolName12: String,
+            year12: String,
+            percentage12: String
+        },
+        graduation: {
+            collegeName: String,
+            year: String,
+            percentage: String
+        }
+    },
 })
 
 const CandidateModel = mongoose.model("candidates", CandidateSchema)
