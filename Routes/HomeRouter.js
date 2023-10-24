@@ -11,4 +11,11 @@ Homerouter.get("/all-candidates", async (req, res) => {
     res.json(result)
 })
 
+Homerouter.get("/candidate/:id", async (req, res) => {
+    let result = await CandidateModel.find({_id:req.params.id})
+    res.json(result)
+    console.log("response gya");
+})
+
+
 export default Homerouter
