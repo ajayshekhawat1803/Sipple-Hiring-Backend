@@ -25,6 +25,7 @@ const CandidateSchema = new mongoose.Schema({
             percentage: String
         }
     },
+    projects: Array
 })
 
 const CandidateModel = mongoose.model("candidates", CandidateSchema)
