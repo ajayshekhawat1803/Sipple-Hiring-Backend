@@ -3,7 +3,7 @@ import multer from 'multer'
 import path from "path";
 import Jwt from "jsonwebtoken";
 import CandidateModel from "../DB/CandidateModel.js";
-
+import RecruiterModel from '../DB/RecruiterModel.js'
 
 const AdminRouter = express.Router();
 const secretKey = "Ajay Shekhawat"
@@ -20,6 +20,21 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
+AdminRouter.post("/add-candidate", upload.single("profilePic"), async (req, res) => {
+    const CandidateInfo = new CandidateModel(req.body)
+    CandidateInfo.profilePic = req.file
+    let result = await CandidateInfo.save()
+    res.json(result)
+})
+AdminRouter.put("/edit-candidate/:id", upload.single("profilePic"), async (req, res) => {
+    let CandidateUpdatedInfo = req.body
+    if (req.file) {
+        CandidateUpdatedInfo.profilePic = req.file
+    }
+    let result = await CandidateModel.findOneAndUpdate({ _id: req.params.id }, { $set: CandidateUpdatedInfo })
+    res.json(result)
+})
+
 AdminRouter.post("/login", async (req, res) => {
     const { username, password } = req.body
     if (username === "admin" && password === "admin") {
@@ -30,11 +45,12 @@ AdminRouter.post("/login", async (req, res) => {
     }
 })
 
-
-AdminRouter.post("/add-candidate", upload.single("profilePic"), async (req, res) => {
-    const CandidateInfo = new CandidateModel(req.body)
-    CandidateInfo.profilePic = req.file
-    let result = await CandidateInfo.save()
+AdminRouter.get("/RecruiterInfo", async (req, res) => {
+    const Recruiters = await RecruiterModel.find()
+    res.json(Recruiters)
+})
+AdminRouter.get("/CandidateInfo/:id", async (req, res) => {
+    let result = await CandidateModel.findOne({ _id: req.params.id })
     res.json(result)
 })
 
