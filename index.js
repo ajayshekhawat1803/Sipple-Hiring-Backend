@@ -5,7 +5,7 @@ import RecruiterRouter from './Routes/RecruiterRouter.js'
 import AdminRouter from './Routes/AdminRouter.js'
 import Homerouter from './Routes/HomeRouter.js'
 const app = express()
-const Port = 4000
+const Port = process.env.PORT ||4000
 app.use(express.json());
 
 app.use(cors())
