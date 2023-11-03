@@ -7,6 +7,7 @@ const secretKey = "Ajay Shekhawat"
 
 RecruiterRouter.post("/info", async (req, res) => {
     const RecruiterInfo = new RecruiterModel(req.body)
+    console.log(RecruiterInfo);
     let result = await RecruiterInfo.save()
     if (result) {
         const payload = { _Id: result._id };
@@ -17,5 +18,13 @@ RecruiterRouter.post("/info", async (req, res) => {
     }
 })
 
+RecruiterRouter.put("/shortlist", async (req, res) => {
+    let result = await RecruiterModel.findByIdAndUpdate({ _id: req.body._id }, { $set: req.body })
+    res.json(result)
+})
+RecruiterRouter.get("/liked/:id", async (req, res) => {
+    let result = await RecruiterModel.findOne({ _id: req.params.id })
+    res.json(result)
+})
 
 export default RecruiterRouter

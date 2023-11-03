@@ -10,12 +10,16 @@ const RecruiterSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    HrCompany: {
-        type: String,
+    Time: {
+        type: String
+    },
+    liked: {
+        type: Object,
         require: true
     },
-    Time:{
-        type: String
+    shortlisted: {
+        type: Array,
+        require: true
     }
 })
 

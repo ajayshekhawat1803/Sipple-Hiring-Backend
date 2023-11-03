@@ -1,7 +1,6 @@
 import express from "express"
 import multer from 'multer'
 import path from "path";
-import Jwt from "jsonwebtoken";
 import CandidateModel from "../DB/CandidateModel.js";
 import RecruiterModel from '../DB/RecruiterModel.js'
 
